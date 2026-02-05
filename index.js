@@ -220,7 +220,7 @@ function buildAccount(index, env) {
       env[`INTERVAL${suffix}`],
       11 * 60 * 60 * 1000
     ),
-    playlist: env[`PLAYLIST${suffix}`] || "mcollection load suy",
+    playlist: env[`PLAYLIST${suffix}`] || "m!p https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     selfDeaf: parseBooleanEnv(env[`SELFDEAF${suffix}`], false),
     selfMute: parseBooleanEnv(env[`SELFMUTE${suffix}`], false),
   };
@@ -355,6 +355,7 @@ async function startAccount(client, account, groupPrefix) {
         if (account.sendChat) {
           try {
             await sendVoiceChat(client, account.voiceChannelId, "m!leave");
+            await sleep(10_000);
             await sendVoiceChat(client, account.voiceChannelId, account.playlist);
             await sleep(10_000);
             await sendVoiceChat(client, account.voiceChannelId, "m!lq");
